@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="test.css">
+    <script src="test.js" defer></script>
+
+</head>
+
+<body>
+
+    <div id="login-container">
+
+        <form>
+            <div id="input_container1">
+                <label for="username">Username:</label>
+                <input id="username" type="text">
+                <i id="checkIconUsername" class="fas fa-check"></i>
+                <i id="closeIconUsername" class="fas fa-times"></i>
+            </div>
+
+            <div id="input_container2">
+                <label for="password">Password:</label>
+                <input id="password" type="password">
+                <i id="checkIconPassword" class="fas fa-check"></i>
+                <i id="closeIconPassword" class="fas fa-times"></i>
+            </div>
+
+            <input type="submit" id="submitbutton" value="Login">
+        </form>
+        <span style="display: block;" id="message1"></span>
+        <span style="display: block;" id="message2"></span>
+        <span style="display: block;" id="message3"></span>
+    </div>
+
+
+
+    <script>
+        submitButton = document.getElementById("submitbutton")
+        submitButton.addEventListener("click", validateUsername)
+        submitButton.addEventListener("click", validatePassword)
+        submitButton.addEventListener("click", preventDefaultEvent)
+        submitButton.addEventListener("click", successfulLogin)
+        function preventDefaultEvent(e) {
+            e.preventDefault();
+            console.log("Default event is prevented!");
+            return false;
+        }
+
+        function successfulLogin() {
+            (username.value == "new_user" && password.value == "123456789") ? 
+            document.getElementById("message3").innerHTML = "Login succesful" : document.getElementById("message3").innerHTML = "Login unsuccesful"
+        }
+
+        
+        function validateUsername() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var usernameInput = document.getElementById("username");
+            var checkIconUsername = document.getElementById("checkIconUsername");
+            var closeIconUsername = document.getElementById("closeIconUsername");
+
+            if (username == null || username == "") {
+                closeIconUsername.style.visibility = "visible"
+                checkIconUsername.style.visibility = "hidden"
+                document.getElementById("message1").innerHTML = "Please, enter username"
+                usernameInput.style.borderColor = "#f23918"
+                return false;
+            } else if (username != "new_user") {
+                closeIconUsername.style.visibility = "visible"
+                checkIconUsername.style.visibility = "hidden"
+                document.getElementById("message1").innerHTML = "Please, enter a valid username"
+                usernameInput.style.borderColor = "#f23918"
+                return false;
+            } else {
+                checkIconUsername.style.visibility = "visible"
+                closeIconUsername.style.visibility = "hidden"
+                usernameInput.style.borderColor = "#5af218"
+                document.getElementById("message1").innerHTML = ""
+                document.getElementById("message2").innerHTML = ""
+                return true;
+            }
+        }
+        
+        function validatePassword() {
+            var checkIconPassword = document.getElementById("checkIconPassword");
+            var closeIconPassword = document.getElementById("closeIconPassword");
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var passwordInput = document.getElementById("password")
+
+            if (password == null || password == "") {
+                closeIconPassword.style.visibility = "visible"
+                checkIconPassword.style.visibility = "hidden"
+                document.getElementById("message2").innerHTML = "Please, enter password"
+                passwordInput.style.borderColor = "#f23918"
+                return false
+            } else if (password != "123456789") {
+                closeIconPassword.style.visibility = "visible"
+                checkIconPassword.style.visibility = "hidden"
+                document.getElementById("message2").innerHTML = "Please, enter a valid password"
+                passwordInput.style.borderColor = "#f23918"
+                return false;
+            } else {
+                checkIconPassword.style.visibility = "visible"
+                closeIconPassword.style.visibility = "hidden"
+                passwordInput.style.borderColor = "#5af218"
+                document.getElementById("message1").innerHTML = ""
+                document.getElementById("message2").innerHTML = ""
+                return true;
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
